@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House Gallery</title>
+  <link rel="stylesheet" href="gallery.css" />
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__brand">
+        <span class="header__icon" aria-hidden="true">&#127968;</span>
+        <h1 class="header__title">House Gallery</h1>
+      </div>
+      <p class="header__meta">
+        Triggered by <kbd>hello world</kbd> &mdash;
+        powered by <a href="https://pixabay.com" target="_blank" rel="noopener noreferrer">Pixabay</a>
+      </p>
+    </div>
+  </header>
+
+  <!-- ===== Main Content ===== -->
+  <main class="main">
+
+    <!-- Loader -->
+    <div id="js-loader" class="loader" role="status" aria-live="polite">
+      <span class="loader__spinner" aria-hidden="true"></span>
+      <span class="loader__text">Loading houses&hellip;</span>
+    </div>
+
+    <!-- Error banner -->
+    <div id="js-error" class="error-banner hidden" role="alert">
+      <strong>Something went wrong.</strong>
+      <span id="js-error-msg"></span>
+      <a href="#" id="js-retry" class="error-banner__retry">Retry</a>
+    </div>
+
+    <!-- Image grid -->
+    <section id="js-gallery" class="gallery" aria-label="House images"></section>
+
+    <!-- Load more -->
+    <div class="load-more-wrap">
+      <button id="js-load-more" class="btn btn--load-more hidden" type="button">
+        Load More
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <p>Images via <a href="https://pixabay.com" target="_blank" rel="noopener noreferrer">Pixabay</a> &mdash; free for commercial use.</p>
+  </footer>
+
+  <script src="gallery.js"></script>
+</body>
+</html>

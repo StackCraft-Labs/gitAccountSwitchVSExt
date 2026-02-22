@@ -1,0 +1,121 @@
+{
+  "name": "github-account-switcher",
+  "displayName": "GitHub Account Switcher",
+  "description": "Manage multiple GitHub SSH accounts seamlessly – switch keys, remotes, and git config in one click.",
+  "version": "0.1.0",
+  "publisher": "your-publisher-id",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["git", "github", "ssh", "account", "switcher"],
+  "icon": "images/icon.png",
+  "activationEvents": [
+    "onStartupFinished",
+    "workspaceContains:.git/config"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "github-account.switch",
+        "title": "Switch Account",
+        "category": "GitHub Account",
+        "icon": "$(account)"
+      },
+      {
+        "command": "github-account.add",
+        "title": "Add New Account",
+        "category": "GitHub Account",
+        "icon": "$(add)"
+      },
+      {
+        "command": "github-account.testCurrent",
+        "title": "Test Current Connection",
+        "category": "GitHub Account",
+        "icon": "$(check)"
+      },
+      {
+        "command": "github-account.editSshConfig",
+        "title": "Edit SSH Config",
+        "category": "GitHub Account",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "github-account.syncGitConfig",
+        "title": "Sync Git Config",
+        "category": "GitHub Account",
+        "icon": "$(sync)"
+      }
+    ],
+    "configuration": {
+      "title": "GitHub Account Switcher",
+      "properties": {
+        "githubAccountSwitcher.accounts": {
+          "type": "array",
+          "default": [],
+          "description": "List of configured GitHub SSH accounts.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Display name for this account (e.g. 'Agency', 'Personal')."
+              },
+              "hostAlias": {
+                "type": "string",
+                "description": "SSH host alias matching a Host entry in ~/.ssh/config (e.g. 'github.com-agency')."
+              },
+              "keyPath": {
+                "type": "string",
+                "description": "Path to the private SSH key (e.g. '~/.ssh/id_ed25519_agency')."
+              },
+              "default": {
+                "type": "boolean",
+                "description": "Mark this as the default account."
+              },
+              "email": {
+                "type": "string",
+                "description": "Email address used for git config user.email when this account is active."
+              },
+              "username": {
+                "type": "string",
+                "description": "GitHub username used for git config user.name when this account is active."
+              }
+            },
+            "required": ["name", "hostAlias", "keyPath"]
+          }
+        },
+        "githubAccountSwitcher.syncGitConfigOnSwitch": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically update git config (user.name, user.email) when switching accounts."
+        },
+        "githubAccountSwitcher.testConnectionOnSwitch": {
+          "type": "boolean",
+          "default": false,
+          "description": "Run 'ssh -T' to verify the connection after switching accounts."
+        },
+        "githubAccountSwitcher.autoDetectFromRemote": {
+          "type": "boolean",
+          "default": true,
+          "description": "Infer the active account from the current repository's remote URL."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.3.0"
+  }
+}
